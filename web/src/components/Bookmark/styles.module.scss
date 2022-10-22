@@ -1,7 +1,9 @@
 @import "../../styles/variables.scss";
 
+$bookmarkWidth: 28rem;
+
 .bookmark {
-  width: 28rem;
+  width: $bookmarkWidth;
   height: 26.5rem;
   border-radius: 0.8rem;
   border: 4px solid $light-gray;
@@ -26,9 +28,10 @@
   }
 
   .description {
-    max-width: 100%;
+    display: inline;
     width: 100%;
     height: 7.6rem;
+    word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-top: 1.5rem;
@@ -37,7 +40,7 @@
   }
 
   .link {
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -66,13 +69,14 @@
 
   .moreDetailsButton {
     width: 100%;
-    height: 4rem;
+    min-height: 4rem;
     margin-top: 1.5rem;
     background: $blue;
     border: 0;
     border-radius: 0.8rem;
     cursor: pointer;
     transition: 0.15s ease;
+    text-transform: uppercase;
     color: $white;
     font-size: 2.2rem;
     font-weight: 700;

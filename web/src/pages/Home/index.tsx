@@ -10,6 +10,7 @@ import { api } from "../../service/api";
 import { useAuth } from "../../hooks/useAuth";
 
 import styles from "./styles.module.scss";
+import { Input } from "../../components/Input";
 
 export function Home() {
   const [search, setSearch] = useState("");
@@ -37,7 +38,7 @@ export function Home() {
           <h2>Bookmarks</h2>
 
           <div className={styles.right}>
-            <input
+            <Input
               className={styles.searchInput}
               type="text"
               autoComplete="off"

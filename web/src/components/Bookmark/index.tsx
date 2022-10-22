@@ -13,7 +13,7 @@ export function Bookmark({ bookmark }: BookmarkProps) {
         <span>{bookmark.title}</span>
       </p>
 
-      <p className={styles.description}>{bookmark.description}</p>
+      <div className={styles.description}>{bookmark.description}</div>
 
       <a target={"_blank"} href={bookmark.link} className={styles.link}>
         <Link />

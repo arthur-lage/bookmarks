@@ -1,0 +1,23 @@
+@import "../../styles/variables.scss";
+
+.input {
+  color: $light-gray;
+  background: transparent;
+  padding: 0 3rem;
+  border: 4px solid $dark-purple;
+  outline: none;
+  font-size: 2.8rem;
+  border-radius: 0.8rem;
+  height: 100%;
+  width: 100%;
+  transition: 0.15s ease;
+
+  &:focus {
+    border-color: $light-gray;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &::placeholder {
+    color: $light-gray;
+  }
+}

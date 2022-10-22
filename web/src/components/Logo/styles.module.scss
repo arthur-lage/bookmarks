@@ -1,0 +1,20 @@
+@import "../../styles/variables.scss";
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+
+  svg,
+  span {
+    color: $white;
+  }
+
+  svg {
+    font-size: 7.2rem;
+  }
+
+  span {
+    font-size: 5.8rem;
+  }
+}
