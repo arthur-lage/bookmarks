@@ -1,0 +1,70 @@
+@import "../../styles/variables.scss";
+
+.home {
+  main {
+    margin-top: 7.6rem;
+    padding: 0 9rem;
+  }
+
+  .searchAndCreateBookmark {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 9.5rem;
+
+    h2 {
+      font-size: 4rem;
+      color: $white;
+      text-transform: uppercase;
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 8rem;
+
+      .searchInput {
+        color: $light-gray;
+        background: transparent;
+        padding: 0 3rem;
+        border: 4px solid $dark-purple;
+        outline: none;
+        font-size: 2.8rem;
+        border-radius: 0.8rem;
+        height: 6rem;
+        transition: 0.15s ease;
+
+        &:focus {
+          border-color: $light-gray;
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        &::placeholder {
+          color: $light-gray;
+        }
+      }
+
+      .newBookmarkButton {
+        width: 25rem;
+        height: 6rem;
+        background: $blue;
+        color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 2.8rem;
+        border-radius: 0.8rem;
+        font-weight: 700;
+        border: 0;
+        transition: 0.15s ease;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.015);
+          filter: brightness(1.2);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+@import "../../styles/variables.scss";
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 10rem;
+  padding: 2.6rem 9rem;
+  box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    text-decoration: none;
+
+    svg,
+    span {
+      font-size: 4rem;
+      color: $white;
+    }
+
+    span {
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 8rem;
+
+    .email {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      svg,
+      span {
+        color: $white;
+      }
+
+      svg {
+        font-size: 3.2rem;
+      }
+
+      span {
+        font-size: 2.6rem;
+      }
+    }
+
+    .logout {
+      transition: .15s ease;
+      cursor: pointer;
+      background: $red;
+      padding: 0.9rem, 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 0;
+      width: 25rem;
+      height: 6rem;
+      gap: 1rem;
+      border-radius: 0.8rem;
+
+      svg,
+      span {
+        color: $white;
+      }
+
+      svg {
+        font-size: 4.2rem;
+      }
+
+      span {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 2.8rem;
+      }
+
+      &:hover {
+        transform: scale(1.015);
+      }
+    }
+  }
+}
