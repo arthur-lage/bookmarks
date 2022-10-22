@@ -14,9 +14,6 @@ import styles from "./styles.module.scss";
 export function Home() {
   const [search, setSearch] = useState("");
   const [bookmarks, setBookmarks] = useState<[] | IBookmark[]>([]);
-  const [bookmarksBeingShown, setBookmarksBeingShown] = useState<
-    [] | IBookmark[]
-  >([]);
   const { accessToken } = useAuth();
 
   useEffect(() => {
@@ -26,7 +23,6 @@ export function Home() {
       const res = await api.get("/bookmarks");
 
       setBookmarks(res.data);
-      setBookmarksBeingShown(res.data);
     }
 
     fetchBookmarks();
@@ -54,7 +50,7 @@ export function Home() {
           </div>
         </section>
 
-        <BookmarkList bookmarks={bookmarksBeingShown} />
+        <BookmarkList search={search} bookmarks={bookmarks} />
       </main>
     </div>
   );

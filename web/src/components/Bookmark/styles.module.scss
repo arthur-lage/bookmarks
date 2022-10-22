@@ -1,0 +1,84 @@
+@import "../../styles/variables.scss";
+
+.bookmark {
+  width: 28rem;
+  height: 26.5rem;
+  border-radius: 0.8rem;
+  border: 4px solid $light-gray;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    svg {
+      color: $light-gray;
+      font-size: 3.2rem;
+    }
+
+    span {
+      color: $link-white;
+      font-size: 2rem;
+    }
+  }
+
+  .description {
+    max-width: 100%;
+    width: 100%;
+    height: 7.6rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 1.5rem;
+    color: $link-white;
+    font-size: 1.8rem;
+  }
+
+  .link {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    &:hover {
+      svg,
+      span {
+        color: $light-blue;
+      }
+    }
+
+    svg,
+    span {
+      transition: 0.15s ease;
+      color: $link-white;
+    }
+
+    svg {
+      font-size: 2.4rem;
+    }
+
+    span {
+      font-size: 1.6rem;
+    }
+  }
+
+  .moreDetailsButton {
+    width: 100%;
+    height: 4rem;
+    margin-top: 1.5rem;
+    background: $blue;
+    border: 0;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: 0.15s ease;
+    color: $white;
+    font-size: 2.2rem;
+    font-weight: 700;
+
+    &:hover {
+      filter: brightness(1.2);
+    }
+  }
+}

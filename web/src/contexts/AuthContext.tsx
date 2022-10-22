@@ -16,7 +16,9 @@ type Props = {
 };
 
 export function AuthProvider({ children }: Props) {
-  const [accessToken, setAccessToken] = useState<string | null>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyM2U4N2EyYi02YjhlLTRiYzctOTQxYy0zM2M1ZTM4NjgzMzEiLCJlbWFpbCI6ImFydGh1cmxhZ2UyMDA2QGdtYWlsLmNvbSIsImlhdCI6MTY2NjM5ODUxMywiZXhwIjoxNjY2NDAyMTEzfQ.NGYL2PK7X2ohtd5cXSebhLlysgXWEK_5F3i5hfjJpuE");
+  const [accessToken, setAccessToken] = useState<string | null>(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyM2U4N2EyYi02YjhlLTRiYzctOTQxYy0zM2M1ZTM4NjgzMzEiLCJlbWFpbCI6ImFydGh1cmxhZ2UyMDA2QGdtYWlsLmNvbSIsImlhdCI6MTY2NjQzNjQ0OSwiZXhwIjoxNjY2NDQwMDQ5fQ.-24PS_OazlmFRKR9b9lzeLQwMjyoZJTLTmjIdpB0I7Y"
+  );
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export function AuthProvider({ children }: Props) {
 
       setCurrentUser(res.data);
     }
-    
+
     fetchUserData();
   }, []);
 
