@@ -7,6 +7,25 @@
   height: 10rem;
   padding: 2.6rem 9rem;
   box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  position: relative;
+
+  @media screen and (max-width: 829px) {
+    &.active {
+      .right {
+        border-radius: 1rem;
+        left: 50%;
+        padding: 4rem 0;
+        background: $dark-purple;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    padding: 2.6rem 4rem;
+  }
 
   .logo {
     display: flex;
@@ -18,6 +37,10 @@
     span {
       font-size: 4rem;
       color: $white;
+
+      @media screen and (max-width: 1200px) {
+        font-size: 2.4rem;
+      }
     }
 
     span {
@@ -26,10 +49,95 @@
     }
   }
 
+  .hamburger {
+    width: 3rem;
+    height: 2rem;
+    background: transparent;
+    border: 0;
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1112938210893;
+
+    @media screen and (max-width: 829px) {
+      display: flex;
+    }
+
+    @media screen and (min-width: 830px) {
+      display: none;
+    }
+
+    .lines {
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      .line {
+        transition: 0.15s ease;
+        width: 100%;
+        height: 2.5px;
+        background: $white;
+        position: absolute;
+
+        &:nth-child(1) {
+          top: 0;
+        }
+
+        &:nth-child(2) {
+          top: 50%;
+        }
+
+        &:nth-child(3) {
+          top: 100%;
+        }
+      }
+    }
+
+    &.active {
+      .line:nth-child(1) {
+        transform: rotateZ(45deg);
+        top: 1.5rem;
+      }
+
+      .line:nth-child(2) {
+        opacity: 0;
+      }
+
+      .line:nth-child(3) {
+        top: 1.5rem;
+        transform: rotateZ(-45deg);
+      }
+    }
+  }
+
   .right {
+    @media screen and (max-width: 829px) {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      position: absolute;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 95vw;
+      position: absolute;
+      left: 0;
+      transform: translateX(-50%);
+      top: 12rem;
+    }
+
+    transition: 0.15s ease;
     display: flex;
     align-items: center;
     gap: 8rem;
+
+    @media screen and (max-width: 1200px) {
+      gap: 4rem;
+    }
 
     .email {
       display: flex;
@@ -43,27 +151,39 @@
 
       svg {
         font-size: 3.2rem;
+
+        @media screen and (max-width: 1200px) {
+          font-size: 2rem;
+        }
       }
 
       span {
         font-size: 2.6rem;
+
+        @media screen and (max-width: 1200px) {
+          font-size: 2rem;
+        }
       }
     }
 
     .logout {
-      transition: .15s ease;
+      transition: 0.15s ease;
       cursor: pointer;
       background: $red;
       padding: 0.9rem, 2.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 1rem;
       text-align: center;
       border: 0;
       width: 25rem;
       height: 6rem;
-      gap: 1rem;
       border-radius: 0.8rem;
+
+      @media screen and (max-width: 1200px) {
+        width: 20rem;
+      }
 
       svg,
       span {
@@ -72,12 +192,20 @@
 
       svg {
         font-size: 4.2rem;
+
+        @media screen and (max-width: 1200px) {
+          font-size: 3.6rem;
+        }
       }
 
       span {
         font-weight: 700;
         text-transform: uppercase;
         font-size: 2.8rem;
+
+        @media screen and (max-width: 1200px) {
+          font-size: 2.4rem;
+        }
       }
 
       &:hover {

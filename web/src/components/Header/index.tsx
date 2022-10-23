@@ -4,6 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { At, Bookmarks, SignOut } from "phosphor-react";
 
 import styles from "./styles.module.scss";
+import { useState } from "react";
 
 type HeaderProps = {
   setIsModalActive: (state: boolean) => void;
@@ -11,6 +12,8 @@ type HeaderProps = {
 };
 
 export function Header({ setIsModalActive, setModalType }: HeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const { currentUser, logout } = useAuth();
 
   function handleLogout() {
@@ -18,12 +21,27 @@ export function Header({ setIsModalActive, setModalType }: HeaderProps) {
     setModalType("logout");
   }
 
+  function handleMenu() {
+    setIsMenuOpen(!isMenuOpen);
+  }
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isMenuOpen ? styles.active : ""}`}>
       <Link className={styles.logo} to="/">
         <Bookmarks weight="fill" />
         <span>Bookmarks</span>
       </Link>
+
+      <button
+        onClick={handleMenu}
+        className={`${styles.hamburger} ${isMenuOpen ? styles.active : ""}`}
+      >
+        <div className={styles.lines}>
+          <div className={styles.line}></div>
+          <div className={styles.line}></div>
+          <div className={styles.line}></div>
+        </div>
+      </button>
 
       <div className={styles.right}>
         <p className={styles.email}>

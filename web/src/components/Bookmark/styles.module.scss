@@ -11,6 +11,11 @@ $bookmarkWidth: 28rem;
   display: flex;
   flex-direction: column;
 
+  @media screen and (max-width: 759px) {
+    $bookmarkWidth: 100%;
+    width: $bookmarkWidth;
+  }
+
   .title {
     display: flex;
     align-items: center;
