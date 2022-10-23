@@ -10,12 +10,20 @@ export interface BookmarkListProps {
 
 export function BookmarkList({ bookmarks, search }: BookmarkListProps) {
   return (
-    <section className={styles.bookmarkList}>
-      {bookmarks
-        .filter((bookmark) => bookmark.title.match(new RegExp(search, "i")))
-        .map((bookmark) => (
-          <Bookmark key={bookmark.id} bookmark={bookmark} />
-        ))}
-    </section>
+    <div className={styles.bookmarkListWrapper}>
+      {bookmarks.length > 0 ? (
+        <section className={styles.bookmarkList}>
+          {bookmarks
+            .filter((bookmark) => bookmark.title.match(new RegExp(search, "i")))
+            .map((bookmark) => (
+              <Bookmark key={bookmark.id} bookmark={bookmark} />
+            ))}
+        </section>
+      ) : (
+        <div className={styles.noBookmarksWrapper}>
+          <h3>You haven't created a bookmark yet</h3>
+        </div>
+      )}
+    </div>
   );
 }

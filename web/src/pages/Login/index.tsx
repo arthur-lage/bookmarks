@@ -1,5 +1,5 @@
 import { FormEvent, useReducer, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo";
 import { api } from "../../service/api";
 
@@ -38,7 +38,9 @@ function reducer(
 export function Login() {
   const [formState, dispatch] = useReducer(reducer, initialFormState);
   const [errorMessage, setErrorMessage] = useState<null | IError>(null);
-  const { setAccessToken } = useAuth();
+  const { currentUser, handleSetToken } = useAuth();
+
+  const navigate = useNavigate();
 
   async function handleLogin(e: FormEvent) {
     e.preventDefault();
@@ -49,7 +51,9 @@ export function Login() {
         password: formState.password,
       });
 
-      setAccessToken(res.data.access_token);
+      handleSetToken(res.data.access_token);
+
+      navigate("/");
     } catch (err: any) {
       setErrorMessage({
         error: err.response.data.error,
@@ -60,10 +64,14 @@ export function Login() {
   }
 
   return (
-    <div className={styles.login}>
-      <Logo />
+    <>
+      {currentUser ? (
+        <Navigate to="/" />
+      ) : (
+        <div className={styles.login}>
+          <Logo />
 
-      {/* <div>
+          {/* <div>
         <p
           style={{
             color: "white",
@@ -81,42 +89,44 @@ export function Login() {
         </p>
       </div> */}
 
-      <form onSubmit={handleLogin}>
-        <div className={styles.inputField}>
-          <Input
-            type="email"
-            placeholder="Email"
-            value={formState.email}
-            autoFocus
-            onChange={(e) =>
-              dispatch({
-                type: "UPDATE INPUT",
-                key: "email",
-                value: e.target.value,
-              })
-            }
-          />
+          <form onSubmit={handleLogin}>
+            <div className={styles.inputField}>
+              <Input
+                type="email"
+                placeholder="Email"
+                value={formState.email}
+                autoFocus
+                onChange={(e) =>
+                  dispatch({
+                    type: "UPDATE INPUT",
+                    key: "email",
+                    value: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className={styles.inputField}>
+              <Input
+                type="password"
+                placeholder="Password"
+                value={formState.password}
+                onChange={(e) =>
+                  dispatch({
+                    type: "UPDATE INPUT",
+                    key: "password",
+                    value: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <Link to="/register">Don't have an account yet? Create one</Link>
+
+            <button type="submit">Login</button>
+          </form>
         </div>
-
-        <div className={styles.inputField}>
-          <Input
-            type="password"
-            placeholder="Password"
-            value={formState.password}
-            onChange={(e) =>
-              dispatch({
-                type: "UPDATE INPUT",
-                key: "password",
-                value: e.target.value,
-              })
-            }
-          />
-        </div>
-
-        <Link to="/register">Don't have an account yet? Create one</Link>
-
-        <button type="submit">Login</button>
-      </form>
-    </div>
+      )}
+    </>
   );
 }

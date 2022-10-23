@@ -12,6 +12,15 @@
   width: 100%;
   transition: 0.15s ease;
 
+  @media screen and (max-width: 1366px) {
+    font-size: 2.4rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 1.9rem;
+    padding-left: 2rem;
+  }
+
   &:focus {
     border-color: $light-gray;
     background: rgba(255, 255, 255, 0.05);

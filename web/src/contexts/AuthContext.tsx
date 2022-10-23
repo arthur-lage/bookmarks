@@ -4,9 +4,10 @@ import { api } from "../service/api";
 
 type AuthContextProps = {
   accessToken: string | null;
-  setAccessToken: (newAccessToken: string) => void;
+  handleSetToken: (newAccessToken: string | null) => void;
   currentUser: User | null;
   setCurrentUser: (newUser: User | null) => void;
+  logout: () => void;
 };
 
 export const AuthContext = createContext({} as AuthContextProps);
@@ -16,26 +17,51 @@ type Props = {
 };
 
 export function AuthProvider({ children }: Props) {
-  const [accessToken, setAccessToken] = useState<string | null>(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyM2U4N2EyYi02YjhlLTRiYzctOTQxYy0zM2M1ZTM4NjgzMzEiLCJlbWFpbCI6ImFydGh1cmxhZ2UyMDA2QGdtYWlsLmNvbSIsImlhdCI6MTY2NjQzNjQ0OSwiZXhwIjoxNjY2NDQwMDQ5fQ.-24PS_OazlmFRKR9b9lzeLQwMjyoZJTLTmjIdpB0I7Y"
-  );
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-  useEffect(() => {
+  function logout() {
+    setCurrentUser(null);
+    handleSetToken(null);
+    localStorage.setItem("bookmarks::access_token", JSON.stringify(null));
+    window.location.href = "/login";
+  }
+
+  function handleSetToken(newToken: string | null) {
+    localStorage.setItem("bookmarks::access_token", JSON.stringify(newToken));
+    setAccessToken(newToken);
+  }
+
+  async function fetchUserData() {
+    if (localStorage.getItem("bookmarks::access_token") !== null) {
+      handleSetToken(
+        JSON.parse(localStorage.getItem("bookmarks::access_token") as string)
+      );
+    }
+
+    if (!accessToken) {
+      return;
+    }
+
     api.defaults.headers.Authorization = `Bearer ${accessToken}`;
 
-    async function fetchUserData() {
+    try {
       const res = await api.get("/users/me");
 
       setCurrentUser(res.data);
+    } catch (err) {
+      console.error(err);
     }
+  }
 
+  useEffect(() => {
     fetchUserData();
-  }, []);
+  }, [accessToken]);
 
   const value = {
+    logout,
     accessToken,
-    setAccessToken,
+    handleSetToken,
     currentUser,
     setCurrentUser,
   };

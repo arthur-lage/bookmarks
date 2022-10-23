@@ -5,6 +5,14 @@
   align-items: center;
   gap: 3.5rem;
 
+  @media screen and (max-width: 1366px) {
+    gap: 2.75rem;
+  }
+
+  @media screen and (max-width: 450px) {
+    gap: 2rem;
+  }
+
   svg,
   span {
     color: $white;
@@ -12,9 +20,25 @@
 
   svg {
     font-size: 7.2rem;
+
+    @media screen and (max-width: 1366px) {
+      font-size: 5.4rem;
+    }
+
+    @media screen and (max-width: 375px) {
+      font-size: 4.2rem;
+    }
   }
 
   span {
     font-size: 5.8rem;
+
+    @media screen and (max-width: 1366px) {
+      font-size: 4.6rem;
+    }
+
+    @media screen and (max-width: 375px) {
+      font-size: 3.4rem;
+    }
   }
 }

@@ -1,5 +1,20 @@
-.bookmarkList {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 5rem;
+@import "../../styles/variables.scss";
+
+.bookmarkListWrapper {
+  .noBookmarksWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h3 {
+      font-size: 3.2rem;
+      color: $white;
+    }
+  }
+
+  .bookmarkList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 5rem;
+  }
 }

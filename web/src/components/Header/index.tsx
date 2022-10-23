@@ -5,8 +5,18 @@ import { At, Bookmarks, SignOut } from "phosphor-react";
 
 import styles from "./styles.module.scss";
 
-export function Header() {
-  const { currentUser } = useAuth();
+type HeaderProps = {
+  setIsModalActive: (state: boolean) => void;
+  setModalType: (state: string) => void;
+};
+
+export function Header({ setIsModalActive, setModalType }: HeaderProps) {
+  const { currentUser, logout } = useAuth();
+
+  function handleLogout() {
+    setIsModalActive(true);
+    setModalType("logout");
+  }
 
   return (
     <header className={styles.header}>
@@ -21,7 +31,7 @@ export function Header() {
           <span>{currentUser?.email}</span>
         </p>
 
-        <button className={styles.logout}>
+        <button onClick={handleLogout} className={styles.logout}>
           <SignOut weight="bold" />
           <span>Log out</span>
         </button>

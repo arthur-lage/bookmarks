@@ -1,5 +1,5 @@
 import { FormEvent, useReducer, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Logo } from "../../components/Logo";
 import { useAuth } from "../../hooks/useAuth";
 import { api } from "../../service/api";
@@ -43,11 +43,11 @@ export function Register() {
   const [formState, dispatch] = useReducer(reducer, initialFormState);
   const [errorMessage, setErrorMessage] = useState<null | IError>(null);
 
-  const { setAccessToken } = useAuth();
+  const { currentUser, handleSetToken } = useAuth();
 
   async function handleRegister(e: FormEvent) {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     try {
       const res = await api.post("/auth/signup", {
         firstName: formState.firstName,
@@ -56,7 +56,7 @@ export function Register() {
         password: formState.password,
       });
 
-      setAccessToken(res.data.access_token);
+      handleSetToken(res.data.access_token);
     } catch (err: any) {
       setErrorMessage({
         error: err.response.data.error,
@@ -67,75 +67,81 @@ export function Register() {
   }
 
   return (
-    <div className={styles.register}>
-      <Logo />
+    <>
+      {currentUser ? (
+        <Navigate to="/" />
+      ) : (
+        <div className={styles.register}>
+          <Logo />
 
-      <form onSubmit={handleRegister}>
-        <div className={styles.inputField}>
-          <Input
-            type="text"
-            placeholder="First name"
-            value={formState.firstName}
-            autoFocus
-            onChange={(e) =>
-              dispatch({
-                type: "UPDATE INPUT",
-                key: "firstName",
-                value: e.target.value,
-              })
-            }
-          />
+          <form onSubmit={handleRegister}>
+            <div className={styles.inputField}>
+              <Input
+                type="text"
+                placeholder="First name"
+                value={formState.firstName}
+                autoFocus
+                onChange={(e) =>
+                  dispatch({
+                    type: "UPDATE INPUT",
+                    key: "firstName",
+                    value: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className={styles.inputField}>
+              <Input
+                type="text"
+                placeholder="Last name"
+                value={formState.lastName}
+                onChange={(e) =>
+                  dispatch({
+                    type: "UPDATE INPUT",
+                    key: "lastName",
+                    value: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className={styles.inputField}>
+              <Input
+                type="email"
+                value={formState.email}
+                placeholder="Email"
+                onChange={(e) =>
+                  dispatch({
+                    type: "UPDATE INPUT",
+                    key: "email",
+                    value: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className={styles.inputField}>
+              <Input
+                type="password"
+                value={formState.password}
+                placeholder="Password"
+                onChange={(e) =>
+                  dispatch({
+                    type: "UPDATE INPUT",
+                    key: "password",
+                    value: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <Link to="/login">Already have an account? Login</Link>
+
+            <button type="submit">Register</button>
+          </form>
         </div>
-
-        <div className={styles.inputField}>
-          <Input
-            type="text"
-            placeholder="Last name"
-            value={formState.lastName}
-            onChange={(e) =>
-              dispatch({
-                type: "UPDATE INPUT",
-                key: "lastName",
-                value: e.target.value,
-              })
-            }
-          />
-        </div>
-
-        <div className={styles.inputField}>
-          <Input
-            type="email"
-            value={formState.email}
-            placeholder="Email"
-            onChange={(e) =>
-              dispatch({
-                type: "UPDATE INPUT",
-                key: "email",
-                value: e.target.value,
-              })
-            }
-          />
-        </div>
-
-        <div className={styles.inputField}>
-          <Input
-            type="password"
-            value={formState.password}
-            placeholder="Password"
-            onChange={(e) =>
-              dispatch({
-                type: "UPDATE INPUT",
-                key: "password",
-                value: e.target.value,
-              })
-            }
-          />
-        </div>
-
-        <Link to="/login">Already have an account? Login</Link>
-
-        <button type="submit">Register</button>
-      </form>
-    </div>
+      )}
+    </>
   );
 }
