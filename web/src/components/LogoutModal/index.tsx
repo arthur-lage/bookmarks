@@ -1,16 +1,12 @@
 import { useAuth } from "../../hooks/useAuth";
+import { IModalProps } from "../../interfaces/IModalProps";
 
 import styles from "./styles.module.scss"
-
-type LogoutModalProps = {
-  setIsModalActive: (state: boolean) => void;
-  setModalType: (state: string) => void;
-};
 
 export function LogoutModal({
   setIsModalActive,
   setModalType,
-}: LogoutModalProps) {
+}: IModalProps) {
   const { logout } = useAuth();
 
   function closeModal() {

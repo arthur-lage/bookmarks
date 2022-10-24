@@ -50,7 +50,7 @@ export function AuthProvider({ children }: Props) {
 
       setCurrentUser(res.data);
     } catch (err) {
-      console.error(err);
+      logout();
     }
   }
 

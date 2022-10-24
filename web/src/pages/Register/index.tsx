@@ -7,6 +7,7 @@ import { IError } from "../../interfaces/IError";
 
 import styles from "./styles.module.scss";
 import { Input } from "../../components/Input";
+import { IReducerAction } from "../../interfaces/IReducerAction";
 
 interface IRegisterForm {
   firstName: string;
@@ -24,7 +25,7 @@ const initialFormState: IRegisterForm = {
 
 function reducer(
   state: IRegisterForm,
-  action: { type: string; key: string; value: string }
+  action: IReducerAction
 ) {
   switch (action.type) {
     case "UPDATE INPUT":

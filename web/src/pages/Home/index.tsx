@@ -14,6 +14,7 @@ import styles from "./styles.module.scss";
 import { Input } from "../../components/Input";
 import { ModalWrapper } from "../../components/ModalWrapper";
 import { LogoutModal } from "../../components/LogoutModal";
+import { CreateBookmarkModal } from "../../components/CreateBookmarkModal";
 
 export function Home() {
   const [search, setSearch] = useState("");
@@ -21,6 +22,11 @@ export function Home() {
   const [isModalActive, setIsModalActive] = useState(false);
   const [modalType, setModalType] = useState("")
   const { accessToken } = useAuth();
+
+  function handleNewBookmark () {
+    setModalType("create-bookmark")
+    setIsModalActive(true)
+  }
 
   async function fetchBookmarks() {
     const res = await api.get("/bookmarks");
@@ -44,6 +50,10 @@ export function Home() {
         {modalType === "logout" && (
           <LogoutModal setModalType={setModalType} setIsModalActive={setIsModalActive} />
         )}
+
+        {modalType === "create-bookmark" && (
+          <CreateBookmarkModal setModalType={setModalType} setIsModalActive={setIsModalActive}/>
+        )}
       </ModalWrapper>
 
       <main>
@@ -61,7 +71,7 @@ export function Home() {
               />
             </div>
 
-            <button className={styles.newBookmarkButton}>New Bookmark</button>
+            <button onClick={handleNewBookmark} className={styles.newBookmarkButton}>New Bookmark</button>
           </div>
         </section>
 
