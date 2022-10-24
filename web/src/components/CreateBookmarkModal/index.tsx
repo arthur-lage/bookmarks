@@ -27,10 +27,15 @@ function reducer(state: ICreateBookmark, action: IReducerAction) {
   }
 }
 
+interface ICreateBookmarkProps extends IModalProps {
+  fetchBookmarks: () => void
+}
+
 export function CreateBookmarkModal({
   setIsModalActive,
   setModalType,
-}: IModalProps) {
+  fetchBookmarks
+}: ICreateBookmarkProps) {
   const [formState, dispatch] = useReducer(reducer, initialFormState);
 
   function closeModal() {
@@ -44,13 +49,13 @@ export function CreateBookmarkModal({
     try {
       let description = formState.description ? formState.description : null;
 
-      const res = await api.post("/bookmarks", {
+      await api.post("/bookmarks", {
         title: formState.title,
         description,
         link: formState.link,
       });
 
-      console.log(res);
+      fetchBookmarks()
 
       closeModal();
     } catch (err) {
@@ -60,6 +65,8 @@ export function CreateBookmarkModal({
 
   return (
     <div className={styles.createBookmarkModal}>
+      <h2>Create a new bookmark</h2>
+
       <form onSubmit={handleCreateBookmark}>
         <div className={styles.inputField}>
           <Input
@@ -76,7 +83,7 @@ export function CreateBookmarkModal({
           />
         </div>
 
-        <div className={styles.inputField}>
+        <div className={styles.textareaField}>
           <textarea
             placeholder="Bookmark description (OPTIONAL)"
             onChange={(e) =>

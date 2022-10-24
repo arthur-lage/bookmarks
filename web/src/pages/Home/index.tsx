@@ -20,12 +20,12 @@ export function Home() {
   const [search, setSearch] = useState("");
   const [bookmarks, setBookmarks] = useState<[] | IBookmark[]>([]);
   const [isModalActive, setIsModalActive] = useState(false);
-  const [modalType, setModalType] = useState("")
+  const [modalType, setModalType] = useState("");
   const { accessToken } = useAuth();
 
-  function handleNewBookmark () {
-    setModalType("create-bookmark")
-    setIsModalActive(true)
+  function handleNewBookmark() {
+    setModalType("create-bookmark");
+    setIsModalActive(true);
   }
 
   async function fetchBookmarks() {
@@ -48,11 +48,18 @@ export function Home() {
 
       <ModalWrapper isActive={isModalActive}>
         {modalType === "logout" && (
-          <LogoutModal setModalType={setModalType} setIsModalActive={setIsModalActive} />
+          <LogoutModal
+            setModalType={setModalType}
+            setIsModalActive={setIsModalActive}
+          />
         )}
 
         {modalType === "create-bookmark" && (
-          <CreateBookmarkModal setModalType={setModalType} setIsModalActive={setIsModalActive}/>
+          <CreateBookmarkModal
+            fetchBookmarks={fetchBookmarks}
+            setModalType={setModalType}
+            setIsModalActive={setIsModalActive}
+          />
         )}
       </ModalWrapper>
 
@@ -71,7 +78,12 @@ export function Home() {
               />
             </div>
 
-            <button onClick={handleNewBookmark} className={styles.newBookmarkButton}>New Bookmark</button>
+            <button
+              onClick={handleNewBookmark}
+              className={styles.newBookmarkButton}
+            >
+              New Bookmark
+            </button>
           </div>
         </section>
 
