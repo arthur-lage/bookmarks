@@ -15,17 +15,26 @@ import { Input } from "../../components/Input";
 import { ModalWrapper } from "../../components/ModalWrapper";
 import { LogoutModal } from "../../components/LogoutModal";
 import { CreateBookmarkModal } from "../../components/CreateBookmarkModal";
+import { MoreDetailsModal } from "../../components/MoreDetailsModal";
 
 export function Home() {
   const [search, setSearch] = useState("");
   const [bookmarks, setBookmarks] = useState<[] | IBookmark[]>([]);
   const [isModalActive, setIsModalActive] = useState(false);
+  const [moreDetailsBookmarkId, setMoreDetailsBookmarkId] = useState<
+    string | null
+  >(null);
   const [modalType, setModalType] = useState("");
   const { accessToken } = useAuth();
 
   function handleNewBookmark() {
     setModalType("create-bookmark");
     setIsModalActive(true);
+  }
+
+  function handleMoreDetails () {
+    setModalType("more-details")
+    setIsModalActive(true)
   }
 
   async function fetchBookmarks() {
@@ -61,6 +70,15 @@ export function Home() {
             setIsModalActive={setIsModalActive}
           />
         )}
+
+        {modalType === "more-details" && (
+          <MoreDetailsModal
+            setBookmarkId={setMoreDetailsBookmarkId}
+            bookmarkId={moreDetailsBookmarkId}
+            setModalType={setModalType}
+            setIsModalActive={setIsModalActive}
+          />
+        )}
       </ModalWrapper>
 
       <main>
@@ -87,7 +105,7 @@ export function Home() {
           </div>
         </section>
 
-        <BookmarkList search={search} bookmarks={bookmarks} />
+        <BookmarkList setMoreDetailsBookmarkId={setMoreDetailsBookmarkId} handleMoreDetails={handleMoreDetails} search={search} bookmarks={bookmarks} />
       </main>
     </div>
   );

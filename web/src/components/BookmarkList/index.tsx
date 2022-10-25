@@ -6,9 +6,11 @@ import styles from "./styles.module.scss";
 export interface BookmarkListProps {
   bookmarks: IBookmark[];
   search: string;
+  handleMoreDetails: () => void;
+  setMoreDetailsBookmarkId: (state: string | null) => void
 }
 
-export function BookmarkList({ bookmarks, search }: BookmarkListProps) {
+export function BookmarkList({ setMoreDetailsBookmarkId, handleMoreDetails, bookmarks, search }: BookmarkListProps) {
   return (
     <div className={styles.bookmarkListWrapper}>
       {bookmarks.length > 0 ? (
@@ -16,7 +18,7 @@ export function BookmarkList({ bookmarks, search }: BookmarkListProps) {
           {bookmarks
             .filter((bookmark) => bookmark.title.match(new RegExp(search, "i")))
             .map((bookmark) => (
-              <Bookmark key={bookmark.id} bookmark={bookmark} />
+              <Bookmark setMoreDetailsBookmarkId={setMoreDetailsBookmarkId} handleMoreDetails={handleMoreDetails} key={bookmark.id} bookmark={bookmark} />
             ))}
         </section>
       ) : (

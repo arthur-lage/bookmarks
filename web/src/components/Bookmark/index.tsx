@@ -3,9 +3,20 @@ import { IBookmark } from "../../interfaces/IBookmark";
 import styles from "./styles.module.scss";
 export interface BookmarkProps {
   bookmark: IBookmark;
+  handleMoreDetails: () => void;
+  setMoreDetailsBookmarkId: (state: string | null) => void;
 }
 
-export function Bookmark({ bookmark }: BookmarkProps) {
+export function Bookmark({
+  bookmark,
+  handleMoreDetails,
+  setMoreDetailsBookmarkId,
+}: BookmarkProps) {
+  function handleMoreDetailsButton() {
+    setMoreDetailsBookmarkId(bookmark.id);
+    handleMoreDetails();
+  }
+
   return (
     <div className={styles.bookmark} key={bookmark.id}>
       <p className={styles.title}>
@@ -20,7 +31,12 @@ export function Bookmark({ bookmark }: BookmarkProps) {
         <span>{bookmark.link}</span>
       </a>
 
-      <button className={styles.moreDetailsButton}>More Details</button>
+      <button
+        onClick={handleMoreDetailsButton}
+        className={styles.moreDetailsButton}
+      >
+        More Details
+      </button>
     </div>
   );
 }
