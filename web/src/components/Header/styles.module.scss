@@ -9,6 +9,10 @@
   box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
   position: relative;
 
+  @media screen and (max-width: 1200px) {
+    padding: 2.6rem 4rem;
+  }
+
   @media screen and (max-width: 829px) {
     &.active {
       .right {
@@ -19,12 +23,9 @@
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
+        padding: 3rem;
       }
     }
-  }
-
-  @media screen and (max-width: 1200px) {
-    padding: 2.6rem 4rem;
   }
 
   .logo {
@@ -38,12 +39,16 @@
       font-size: 4rem;
       color: $white;
 
+      @media screen and (max-width: 1400px) {
+        font-size: 3.2rem;
+      }
+
       @media screen and (max-width: 1200px) {
         font-size: 2.4rem;
       }
 
-      @media screen and (max-width: 1400px) {
-        font-size: 3.2rem;
+      @media screen and (max-width: 375px) {
+        font-size: 2.1rem;
       }
     }
 
@@ -119,6 +124,10 @@
   }
 
   .right {
+    @media screen and (max-width: 1200px) {
+      gap: 4rem;
+    }
+
     @media screen and (max-width: 829px) {
       opacity: 0;
       visibility: hidden;
@@ -139,10 +148,6 @@
     align-items: center;
     gap: 8rem;
 
-    @media screen and (max-width: 1200px) {
-      gap: 4rem;
-    }
-
     .email {
       display: flex;
       align-items: center;
@@ -156,24 +161,31 @@
       svg {
         font-size: 3.2rem;
 
+        @media screen and (max-width: 1400px) {
+          font-size: 2.5rem;
+        }
+
         @media screen and (max-width: 1200px) {
           font-size: 2rem;
         }
 
-        @media screen and (max-width: 1400px) {
-          font-size: 2.5rem;
+        @media screen and (max-width: 375px) {
+          font-size: 2.4rem;
         }
       }
 
       span {
         font-size: 2.6rem;
 
+        @media screen and (max-width: 1400px) {
+          font-size: 2.5rem;
+        }
         @media screen and (max-width: 1200px) {
           font-size: 2rem;
         }
 
-        @media screen and (max-width: 1400px) {
-          font-size: 2.5rem;
+        @media screen and (max-width: 375px) {
+          font-size: 1.8rem;
         }
       }
     }
@@ -192,7 +204,7 @@
       width: 25rem;
       height: 6rem;
       border-radius: 0.8rem;
-      
+
       @media screen and (max-width: 1400px) {
         width: 20rem;
         height: 5.5rem;

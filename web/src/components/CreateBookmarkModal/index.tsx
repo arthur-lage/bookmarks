@@ -117,7 +117,7 @@ export function CreateBookmarkModal({
           <button onClick={closeModal} className={styles.cancel}>
             Cancel
           </button>
-          <button className={styles.create}>Create</button>
+          <button type="submit" className={styles.create}>Create</button>
         </div>
       </form>
     </div>

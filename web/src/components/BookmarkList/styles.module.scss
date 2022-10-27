@@ -18,5 +18,10 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 2rem;
+
+    @media screen and (max-width: 520px) {
+      flex-wrap: nowrap;
+      flex-direction: column;
+    }
   }
 }

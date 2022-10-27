@@ -1,0 +1,230 @@
+@import "../../styles/variables.scss";
+
+.moreDetailsModal {
+  width: 70rem;
+  padding: 5rem;
+  background: $modal-background;
+  border-radius: 0.8rem;
+
+  @media screen and (max-width: 870px) {
+    width: 80vw;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 2.25rem;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    @media screen and (max-width: 870px) {
+      flex-direction: column;
+    }
+
+    .deleteButton {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 0;
+      background: $red;
+      border-radius: 0.8rem;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      cursor: pointer;
+
+      svg,
+      span {
+        font-size: 2.2rem;
+        color: $white;
+      }
+
+      span {
+        font-weight: 500;
+      }
+
+      transition: 0.15s ease;
+
+      &:hover {
+        filter: brightness(0.75);
+      }
+
+      @media screen and (max-width: 870px) {
+        width: 100%;
+      }
+    }
+
+    .editButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      border: 2px solid $light-purple;
+      background: $modal-background;
+      border-radius: 0.8rem;
+      padding: 1rem;
+      font-size: 2.2rem;
+      text-align: center;
+      color: $white;
+      cursor: pointer;
+      transition: 0.15s ease;
+
+      &:hover {
+        filter: brightness(0.75);
+      }
+
+      @media screen and (max-width: 870px) {
+        width: 100%;
+      }
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .inputField {
+      width: 100%;
+      height: 5.5rem;
+
+      input {
+        @media screen and (max-width: 500px) {
+          font-size: 1.6rem;
+        }
+      }
+    }
+
+    .textareaField {
+      width: 100%;
+
+      textarea {
+        width: 100%;
+        border: 4px solid $dark-purple;
+        background: transparent;
+        height: 15rem;
+        padding: 1rem;
+        border-radius: 0.8rem;
+        font-size: 2.2rem;
+        outline: 0;
+        color: $light-gray;
+        resize: none;
+        transition: 0.15s ease;
+        padding-left: 3rem;
+
+        &::placeholder {
+          color: $light-gray;
+        }
+
+        &:focus {
+          border-color: $light-gray;
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        @media screen and (max-width: 500px) {
+          font-size: 1.6rem;
+
+          padding-left: 2rem;
+        }
+      }
+    }
+
+    .actions {
+      margin-top: 1rem;
+    }
+  }
+
+  .bookmarkInformation {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0;
+    border-radius: 0.8rem;
+    padding: 1rem;
+    border: 2px solid $light-blue;
+
+    span {
+      display: flex;
+      flex-direction: column;
+      color: $white;
+
+      font-size: 2rem;
+      opacity: 0.8;
+      gap: 1rem;
+
+      span {
+        max-width: 100%;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .divisor {
+      width: 100%;
+      height: 1px;
+      background: $light-gray;
+      margin: 1rem 0;
+    }
+  }
+
+  .cancel {
+    border: 0;
+    background: $light-purple;
+    border-radius: 0.8rem;
+    padding: 1rem;
+    font-size: 2.2rem;
+    cursor: pointer;
+    color: $white;
+    transition: 0.15s ease;
+
+    &:hover {
+      filter: brightness(0.85);
+    }
+
+    @media screen and (max-width: 870px) {
+      width: 100%;
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+
+    @media screen and (max-width: 870px) {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .save {
+      transition: 0.15s ease;
+      color: $white;
+      background: $green;
+      font-size: 2.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      text-align: center;
+      justify-content: center;
+      padding: 1rem;
+      border: 0;
+      border-radius: 0.8rem;
+
+      &:hover {
+        filter: brightness(0.85);
+      }
+
+      svg {
+        font-size: 2.4rem;
+      }
+
+      @media screen and (max-width: 870px) {
+        width: 100%;
+      }
+    }
+  }
+}

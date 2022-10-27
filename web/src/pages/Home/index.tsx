@@ -16,8 +16,10 @@ import { ModalWrapper } from "../../components/ModalWrapper";
 import { LogoutModal } from "../../components/LogoutModal";
 import { CreateBookmarkModal } from "../../components/CreateBookmarkModal";
 import { MoreDetailsModal } from "../../components/MoreDetailsModal";
+import { Loading } from "../../components/Loading";
 
 export function Home() {
+  const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("");
   const [bookmarks, setBookmarks] = useState<[] | IBookmark[]>([]);
   const [isModalActive, setIsModalActive] = useState(false);
@@ -32,15 +34,19 @@ export function Home() {
     setIsModalActive(true);
   }
 
-  function handleMoreDetails () {
-    setModalType("more-details")
-    setIsModalActive(true)
+  function handleMoreDetails() {
+    setModalType("more-details");
+    setIsModalActive(true);
   }
 
   async function fetchBookmarks() {
+    setLoading(true)
+    
     const res = await api.get("/bookmarks");
-
+    
     setBookmarks(res.data);
+
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -53,60 +59,75 @@ export function Home() {
 
   return (
     <div className={styles.home}>
-      <Header setModalType={setModalType} setIsModalActive={setIsModalActive} />
-
-      <ModalWrapper isActive={isModalActive}>
-        {modalType === "logout" && (
-          <LogoutModal
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header
             setModalType={setModalType}
             setIsModalActive={setIsModalActive}
           />
-        )}
 
-        {modalType === "create-bookmark" && (
-          <CreateBookmarkModal
-            fetchBookmarks={fetchBookmarks}
-            setModalType={setModalType}
-            setIsModalActive={setIsModalActive}
-          />
-        )}
-
-        {modalType === "more-details" && (
-          <MoreDetailsModal
-            setBookmarkId={setMoreDetailsBookmarkId}
-            bookmarkId={moreDetailsBookmarkId}
-            setModalType={setModalType}
-            setIsModalActive={setIsModalActive}
-          />
-        )}
-      </ModalWrapper>
-
-      <main>
-        <section className={styles.searchAndCreateBookmark}>
-          <h2>Bookmarks</h2>
-
-          <div className={styles.right}>
-            <div className={styles.inputField}>
-              <Input
-                type="text"
-                autoComplete="off"
-                onChange={(e) => setSearch(e.target.value)}
-                value={search}
-                placeholder="Search for a bookmark..."
+          <ModalWrapper isActive={isModalActive}>
+            {modalType === "logout" && (
+              <LogoutModal
+                setModalType={setModalType}
+                setIsModalActive={setIsModalActive}
               />
-            </div>
+            )}
 
-            <button
-              onClick={handleNewBookmark}
-              className={styles.newBookmarkButton}
-            >
-              New Bookmark
-            </button>
-          </div>
-        </section>
+            {modalType === "create-bookmark" && (
+              <CreateBookmarkModal
+                fetchBookmarks={fetchBookmarks}
+                setModalType={setModalType}
+                setIsModalActive={setIsModalActive}
+              />
+            )}
 
-        <BookmarkList setMoreDetailsBookmarkId={setMoreDetailsBookmarkId} handleMoreDetails={handleMoreDetails} search={search} bookmarks={bookmarks} />
-      </main>
+            {modalType === "more-details" && (
+              <MoreDetailsModal
+                fetchBookmarks={fetchBookmarks}
+                setBookmarkId={setMoreDetailsBookmarkId}
+                bookmarkId={moreDetailsBookmarkId}
+                setModalType={setModalType}
+                setIsModalActive={setIsModalActive}
+              />
+            )}
+          </ModalWrapper>
+
+          <main>
+            <section className={styles.searchAndCreateBookmark}>
+              <h2>Bookmarks</h2>
+
+              <div className={styles.right}>
+                <div className={styles.inputField}>
+                  <Input
+                    type="text"
+                    autoComplete="off"
+                    onChange={(e) => setSearch(e.target.value)}
+                    value={search}
+                    placeholder="Search for a bookmark..."
+                  />
+                </div>
+
+                <button
+                  onClick={handleNewBookmark}
+                  className={styles.newBookmarkButton}
+                >
+                  New Bookmark
+                </button>
+              </div>
+            </section>
+
+            <BookmarkList
+              setMoreDetailsBookmarkId={setMoreDetailsBookmarkId}
+              handleMoreDetails={handleMoreDetails}
+              search={search}
+              bookmarks={bookmarks}
+            />
+          </main>
+        </>
+      )}
     </div>
   );
 }
